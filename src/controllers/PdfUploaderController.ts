@@ -4,6 +4,9 @@ import { Storage } from '@google-cloud/storage';
 const storage = new Storage({keyFilename: __dirname  + "/../../google_keys/storage_key.json"});
 
 class PdfUploaderController{
+    test(request: Request, response: Response) {
+        response.send('Ok');
+    }
     upload(request: Request, response: Response) {
         async function uploadFile() {
             const bucketName = 'poc-pdf-storage';
