@@ -11,5 +11,5 @@ app.listen(port, err => {
   if (err) {
     return console.error(err);
   }
-  return console.log(`server  listening on ${port}`);
+  return console.log(`maxx server listening on ${port}`);
 });
