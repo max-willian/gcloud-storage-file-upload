@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const storage_1 = require("@google-cloud/storage");
 const storage = new storage_1.Storage({ keyFilename: __dirname + "/../../google_keys/storage_key.json" });
 class PdfUploaderController {
+    test(request, response) {
+        response.send('Ok');
+    }
     upload(request, response) {
         function uploadFile() {
             return __awaiter(this, void 0, void 0, function* () {
