@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { Storage } from '@google-cloud/storage';
 
+console.log(`starting ${process.env.PROJECT_ID}`);
+
 const storage = new Storage({
     projectId: process.env.PROJECT_ID,
     credentials: {
