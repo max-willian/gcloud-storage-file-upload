@@ -9,6 +9,8 @@ const storage = new Storage({
     }
 });
 
+console.log(`using ${process.env.PROJECT_ID}`);
+
 class PdfUploaderController{
     test(request: Request, response: Response) {
         response.send('Ok');
