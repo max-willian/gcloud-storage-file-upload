@@ -5,7 +5,7 @@ const app = express();
 
 app.use(routes);
 
-const port = 3000;
+const port = process.env.PORT;
 
 app.listen(port, err => {
   if (err) {
