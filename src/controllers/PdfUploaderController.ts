@@ -32,23 +32,28 @@ class PdfUploaderController{
         
         response.send({error: console.error});
     }
-    async get(request: Request, response: Response){
-        const bucketName = 'poc-pdf-storage';
-        const fileName = 'sample.pdf';
-  
-        // Get a v2 signed URL for the file
-        const [url] = await storage
-            .bucket(bucketName)
-            .file(fileName)
-            .getSignedUrl({
-                version: 'v2', // defaults to 'v2' if missing.
-                action: 'read',
-                expires: Date.now() + 1000 * 60 * 60, // one hour
-            });
-  
-        console.log(`The signed url for ${fileName} is ${url}.`);
+    get(request: Request, response: Response){
+        async function getUrl() {
+            const bucketName = 'poc-pdf-storage';
+            const fileName = 'sample.pdf';
+    
+            // Get a v2 signed URL for the file
+            const [url] = await storage
+                .bucket(bucketName)
+                .file(fileName)
+                .getSignedUrl({
+                    version: 'v2', // defaults to 'v2' if missing.
+                    action: 'read',
+                    expires: Date.now() + 1000 * 60 * 60, // one hour
+                });
 
-        response.send(`<a target="blank" href="${url}">Clique aqui</a>`);
+            console.log(`The signed url for ${fileName} is ${url}.`);
+
+            response.send(`<a target="blank" href="${url}">Clique aqui</a>`);
+        }
+        
+  
+        getUrl().catch(console.error);
     }
 }
 
