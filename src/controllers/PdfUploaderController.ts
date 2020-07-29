@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { Storage } from '@google-cloud/storage';
 
-console.log(process.env.PRIVATE_KEY);
 const storage = new Storage({
     projectId: process.env.PROJECT_ID,
     credentials: {
@@ -11,9 +10,6 @@ const storage = new Storage({
 });
 
 class PdfUploaderController{
-    test(request: Request, response: Response) {
-        response.send('Ok');
-    }
     upload(request: Request, response: Response) {
         async function uploadFile() {
             const bucketName = 'poc-pdf-storage';
