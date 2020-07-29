@@ -5,6 +5,8 @@ const app = express();
 
 app.use(routes);
 
+console.log(`a porta e ${process.env.PORT}`);
+
 const port = process.env.PORT || `3000`
 
 app.listen(port, err => {
