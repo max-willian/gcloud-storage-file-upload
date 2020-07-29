@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { Storage } from '@google-cloud/storage';
 
-console.log(`starting ${process.env.PROJECT_ID}`);
-
+console.log(process.env.PRIVATE_KEY);
 const storage = new Storage({
     projectId: process.env.PROJECT_ID,
     credentials: {
@@ -10,8 +9,6 @@ const storage = new Storage({
         private_key: process.env.PRIVATE_KEY
     }
 });
-
-console.log(`using ${process.env.PROJECT_ID}`);
 
 class PdfUploaderController{
     test(request: Request, response: Response) {
