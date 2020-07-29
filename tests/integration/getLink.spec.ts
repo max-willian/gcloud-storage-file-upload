@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from '../../src/app';
 
 describe('GET /asset', () => {
-    it('Should be able to create a new ONG', async () => {
+    it('Should be able get the asse link', async () => {
         const response = await request(app)
             .get('/asset');
 
