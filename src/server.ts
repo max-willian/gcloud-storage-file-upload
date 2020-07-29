@@ -3,6 +3,8 @@ import routes from './routes';
 
 const app = express();
 
+console.log(`ambiente ${process.env.NODE_ENV}`);
+
 app.use(routes);
 
 console.log(`a porta e ${process.env.PORT}`);
