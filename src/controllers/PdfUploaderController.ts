@@ -46,7 +46,9 @@ class PdfUploaderController{
 
             console.log(`The signed url for ${fileName} is ${url}.`);
 
-            response.send(`<a target="blank" href="${url}">Clique aqui</a>`);
+            response.json({
+                url: url
+            });
         }
         
   
