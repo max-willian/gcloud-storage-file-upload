@@ -10,11 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const storage_1 = require("@google-cloud/storage");
-const storage = new storage_1.Storage({ keyFilename: __dirname + "/../../google_keys/storage_key.json" });
-class PdfUploaderController {
-    test(request, response) {
-        response.send('Ok');
+const storage = new storage_1.Storage({
+    projectId: process.env.PROJECT_ID,
+    credentials: {
+        client_email: process.env.CLIENT_EMAIL,
+        private_key: process.env.PRIVATE_KEY
     }
+});
+class PdfUploaderController {
     upload(request, response) {
         function uploadFile() {
             return __awaiter(this, void 0, void 0, function* () {
@@ -33,21 +36,24 @@ class PdfUploaderController {
         response.send({ error: console.error });
     }
     get(request, response) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const bucketName = 'poc-pdf-storage';
-            const fileName = 'sample.pdf';
-            // Get a v2 signed URL for the file
-            const [url] = yield storage
-                .bucket(bucketName)
-                .file(fileName)
-                .getSignedUrl({
-                version: 'v2',
-                action: 'read',
-                expires: Date.now() + 1000 * 60 * 60,
+        function getUrl() {
+            return __awaiter(this, void 0, void 0, function* () {
+                const bucketName = 'poc-pdf-storage';
+                const fileName = 'sample.pdf';
+                // Get a v2 signed URL for the file
+                const [url] = yield storage
+                    .bucket(bucketName)
+                    .file(fileName)
+                    .getSignedUrl({
+                    version: 'v2',
+                    action: 'read',
+                    expires: Date.now() + 1000 * 60 * 60,
+                });
+                console.log(`The signed url for ${fileName} is ${url}.`);
+                response.send(`<a target="blank" href="${url}">Clique aqui</a>`);
             });
-            console.log(`The signed url for ${fileName} is ${url}.`);
-            response.send(`<a target="blank" href="${url}">Clique aqui</a>`);
-        });
+        }
+        getUrl().catch(console.error);
     }
 }
 exports.default = PdfUploaderController;
