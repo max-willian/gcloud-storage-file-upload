@@ -1,10 +1,4 @@
-import dotenv from 'dotenv';
-
-if(!process.env.PORT){
-  dotenv.config({path: __dirname + '/../.env'});
-}
-  
-import app from "./app";
+ import app from "./app";
 
 console.log(`porta setada ${process.env.PORT}`);
 

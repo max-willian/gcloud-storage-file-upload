@@ -7,6 +7,6 @@ const router = express.Router();
 const pdfController = new PdfUploaderController();
 
 router.get('/upload', pdfController.upload);
-router.get('/see', pdfController.get);
+router.get('/asset', pdfController.get);
 
 export default router;
