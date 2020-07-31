@@ -30,25 +30,22 @@ class PdfUploaderController{
             
                 console.log(`${path} uploaded to ${bucketName}.`);
                 
-                response.status(201).send();
+                return response.status(201).send();
             }
             
-            uploadFile().catch(console.error);
-            
-            response.send({error: console.error});
+            uploadFile().catch(() => response.status(400).send({error: console.error}));
         });
     }
     get(request: Request, response: Response){
         async function getUrl() {
             const bucketName = 'poc-pdf-storage';
             const fileName = 'sample.pdf';
-    
-            // Get a v2 signed URL for the file
+
             const [url] = await storage
                 .bucket(bucketName)
                 .file(fileName)
                 .getSignedUrl({
-                    version: 'v2', // defaults to 'v2' if missing.
+                    version: 'v2',
                     action: 'read',
                     expires: Date.now() + 1000 * 60 * 60, // one hour
                 });
@@ -59,9 +56,8 @@ class PdfUploaderController{
                 url: url
             });
         }
-        
-  
-        getUrl().catch(console.error);
+
+        return getUrl().catch((e) => response.send(e.message));
     }
 }
 
