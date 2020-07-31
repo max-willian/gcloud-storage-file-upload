@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { Storage } from '@google-cloud/storage';
 import formidable from 'formidable';
-import fs from 'fs';
 
 const storage = new Storage({
     projectId: process.env.PROJECT_ID,
