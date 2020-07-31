@@ -1,5 +1,8 @@
 import dotenv from 'dotenv';
-dotenv.config({path: __dirname + '/../.env'});
+
+if(!process.env.PORT){
+  dotenv.config({path: __dirname + '/../.env'});
+}
 
 import express from 'express';
 import routes from './routes';
