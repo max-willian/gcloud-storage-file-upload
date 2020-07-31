@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { Storage } from '@google-cloud/storage';
+import formidable from 'formidable';
+import fs from 'fs';
 
 const storage = new Storage({
     projectId: process.env.PROJECT_ID,
@@ -11,23 +13,31 @@ const storage = new Storage({
 
 class PdfUploaderController{
     upload(request: Request, response: Response) {
-        async function uploadFile() {
-            const bucketName = 'poc-pdf-storage';
-            const filename = __dirname  + '/../../pdfs/sample.pdf';
+        let form = new formidable.IncomingForm();
 
-            await storage.bucket(bucketName).upload(filename, {
-              gzip: true,
-              metadata: {
-                cacheControl: 'public, max-age=31536000',
-              },
-            });
-          
-            console.log(`${filename} uploaded to ${bucketName}.`);
-        }
-          
-        uploadFile().catch(console.error);
-        
-        response.send({error: console.error});
+        form.parse(request, function (err, fields, files) {
+            let {path, name} = files.filetoupload;
+
+            async function uploadFile() {
+                const bucketName = 'poc-pdf-storage';
+
+                await storage.bucket(bucketName).upload(path, {
+                    gzip: true,
+                    destination: name,
+                    metadata: {
+                        cacheControl: 'public, max-age=31536000',
+                    },
+                });
+            
+                console.log(`${path} uploaded to ${bucketName}.`);
+                
+                response.status(201).send();
+            }
+            
+            uploadFile().catch(console.error);
+            
+            response.send({error: console.error});
+        });
     }
     get(request: Request, response: Response){
         async function getUrl() {
