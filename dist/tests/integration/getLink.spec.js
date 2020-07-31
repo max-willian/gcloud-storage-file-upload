@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
-const app_1 = __importDefault(require("../../src/app"));
+const app_1 = require("../../src/app");
 describe('GET /asset', () => {
     it('Should be able get the asse link', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield supertest_1.default(app_1.default)
+        const response = yield supertest_1.default(app_1.app)
             .get('/asset');
         expect(response.body).toHaveProperty('url');
         expect(response.body.url).toContain('http');

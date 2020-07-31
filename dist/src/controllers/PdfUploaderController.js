@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PdfUploaderController = void 0;
 const storage_1 = require("@google-cloud/storage");
 const storage = new storage_1.Storage({
     projectId: process.env.PROJECT_ID,
@@ -58,5 +59,5 @@ class PdfUploaderController {
         getUrl().catch(console.error);
     }
 }
-exports.default = PdfUploaderController;
+exports.PdfUploaderController = PdfUploaderController;
 //# sourceMappingURL=PdfUploaderController.js.map
