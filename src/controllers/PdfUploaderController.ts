@@ -56,4 +56,4 @@ class PdfUploaderController{
     }
 }
 
-export default PdfUploaderController;
+export { PdfUploaderController };

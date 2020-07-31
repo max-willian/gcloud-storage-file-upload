@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../../src/app';
+import { app } from '../../src/app';
 
 describe('GET /asset', () => {
     it('Should be able get the asse link', async () => {

@@ -6,10 +6,10 @@ if(!process.env.PORT){
  
 
 import express from 'express';
-import routes from './routes';
+import { router } from './routes';
 
 const app = express();
 
-app.use(routes);
+app.use(router);
 
-export default app;
+export { app };
